@@ -1,0 +1,17 @@
+struct ListNode {
+	int val;
+	ListNode *next;
+	ListNode(int x) : val(x), next(NULL) {}
+};
+
+ListNode * initList(vector<int>vec) {
+	if((int)vec.size() <= 0) return NULL;
+	ListNode *head = new ListNode(vec[0]);
+	for(int i=1;i<(int)vec.size();++i) {
+		ListNode *node = new ListNode(vec[i]);
+		ListNode *p = head;
+		while(p->next) p = p->next;
+		p->next = node;
+	}
+	return head;
+}
