@@ -45,16 +45,18 @@ public:
         if(rows <= 0) return ;
         int cols = board[0].size();
         if(cols <=0) return ;
+
         UnionFind *uf = new UnionFind(rows*cols+1);
         int dummyNode = rows * cols;
+        
         for(int i=0;i<rows;++i) {
             for(int j=0;j<cols;++j) {
                 if(board[i][j] == 'O') {
-                    // 如果o在边界
+                    // 如果o在边界，那么直接把它跟dummynode归为一个集合
                     if(i == 0 || i == rows-1 || j == 0 || j == cols-1) {
                         uf->myunion(node(i,j,cols),dummyNode);
                     } else {
-                        // 如果o不在边界
+                        // 如果o不在边界，则看它的上下左右
                         if(i>0 && board[i-1][j] == 'O') {
                             uf->myunion(node(i,j,cols),node(i-1,j,cols));
                         } 
@@ -71,6 +73,7 @@ public:
                 }
             }
         }
+        // 将和dummynode连接的‘O’点恢复为‘O’，其他的‘O’点变为‘X’
         for (int i = 0; i < rows; i++) {
             for(int j=0;j<cols;++j) {
                 if(uf->isConnected(node(i,j,cols),dummyNode)) {
@@ -81,6 +84,7 @@ public:
             }
         }
     }
+    // 将二维坐标转换为一维序号
     int node(int i,int j,int cols) {
         return i * cols + j;
     }
