@@ -18,10 +18,6 @@ import (
 //	return pin
 //}
 
-func singleNumber(nums []int) {
-
-}
-
 func main() {
 	vec := []int{0, 1, 0, 1, 0, 1, 99}
 	fmt.Println(singleNumber(vec))
