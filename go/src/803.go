@@ -8,7 +8,7 @@ var (
 
 func hitBricks(grid [][]int, hits [][]int) []int {
 
-	rows, cols := len(grid), len(grid[0])
+	rows, cols = len(grid), len(grid[0])
 	copy := make([][]int, rows)
 
 	for i, val := range grid {

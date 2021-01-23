@@ -28,7 +28,6 @@ func IsHappy(n int) bool {
 		arr = append(arr, s)
 		tmp = s
 	}
-	return false
 }
 
 func main() {
