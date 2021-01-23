@@ -1,14 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"container/list"
+	"fmt"
 )
 
 func main() {
-	temperatures := []int{73,74,75,71,69,72,76,73}
+	temperatures := []int{73, 74, 75, 71, 69, 72, 76, 73}
 	answer := dailyTemperatures(temperatures)
-	for _,val := range answer {
+	for _, val := range answer {
 		fmt.Println(val)
 	}
 }
@@ -35,14 +35,14 @@ func dailyTemperatures(T []int) []int {
 	}
 	l := list.New()
 	l.PushBack(0)
-	for i:=1;i<len(T);i++ {
+	for i := 1; i < len(T); i++ {
 		for l.Len() > 0 && T[i] > T[l.Back().Value.(int)] {
 			tmp := l.Remove(l.Back())
 			T[tmp.(int)] = i - tmp.(int)
 		}
 		l.PushBack(i)
 	}
-	
+
 	for l.Len() > 0 {
 		tmp := l.Remove(l.Back())
 		T[tmp.(int)] = 0

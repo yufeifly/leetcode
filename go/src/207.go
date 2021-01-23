@@ -2,17 +2,17 @@ package main
 
 import (
 	"fmt"
-//	"github.com/golang-collections/collections/queue"
+	//	"github.com/golang-collections/collections/queue"
 )
 
 func canFinish(numCourses int, prerequisites [][]int) bool {
-	indegrees := make([]int,numCourses)
+	indegrees := make([]int, numCourses)
 	for _, cp := range prerequisites {
 		indegrees[cp[0]]++
 	}
 	que := New()
-	for i:=0; i<numCourses; i++ {
-		if indegrees[i]== 0 {
+	for i := 0; i < numCourses; i++ {
+		if indegrees[i] == 0 {
 			que.Enqueue(i)
 		}
 	}
@@ -29,36 +29,36 @@ func canFinish(numCourses int, prerequisites [][]int) bool {
 					que.Enqueue(req[0])
 				}
 			}
-			
+
 		}
 	}
 	return numCourses == 0
 }
 
-
 func main() {
 	pre := [][]int{
-		{1,0},
-		{0,1},
+		{1, 0},
+		{0, 1},
 	}
-	fmt.Println(canFinish(2,pre))
+	fmt.Println(canFinish(2, pre))
 }
 
 type (
 	Queue struct {
 		start, end *node
-		length int
+		length     int
 	}
 	node struct {
 		value interface{}
-		next *node
+		next  *node
 	}
 )
 
 // Create a new queue
 func New() *Queue {
-	return &Queue{nil,nil,0}
+	return &Queue{nil, nil, 0}
 }
+
 // Take the next item off the front of the queue
 func (this *Queue) Dequeue() interface{} {
 	if this.length == 0 {
@@ -74,9 +74,10 @@ func (this *Queue) Dequeue() interface{} {
 	this.length--
 	return n.value
 }
+
 // Put an item on the end of a queue
 func (this *Queue) Enqueue(value interface{}) {
-	n := &node{value,nil}
+	n := &node{value, nil}
 	if this.length == 0 {
 		this.start = n
 		this.end = n
@@ -86,10 +87,12 @@ func (this *Queue) Enqueue(value interface{}) {
 	}
 	this.length++
 }
+
 // Return the number of items in the queue
 func (this *Queue) Len() int {
 	return this.length
 }
+
 // Return the first item in the queue without removing it
 func (this *Queue) Peek() interface{} {
 	if this.length == 0 {

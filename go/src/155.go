@@ -5,17 +5,16 @@ import (
 )
 
 type MinStack struct {
-	st *Stack
+	st  *Stack
 	log *Stack
 }
 
-
 /** initialize your data structure here. */
 func Constructor() MinStack {
-	return MinStack{st : New(),log : New()} 
+	return MinStack{st: New(), log: New()}
 }
 
-func (this *MinStack) Push(x int)  {
+func (this *MinStack) Push(x int) {
 	this.st.Push(x)
 	if this.log.Len() <= 0 {
 		this.log.Push(x)
@@ -26,24 +25,21 @@ func (this *MinStack) Push(x int)  {
 	}
 }
 
-
-func (this *MinStack) Pop()  {
+func (this *MinStack) Pop() {
 	this.st.Pop()
 	this.log.Pop()
 }
-
 
 func (this *MinStack) Top() int {
 	return this.st.Peek().(int)
 }
 
-
 func (this *MinStack) GetMin() int {
 	return this.log.Peek().(int)
 }
 
-func main () {
-	obj := Constructor()	
+func main() {
+	obj := Constructor()
 	obj.Push(1)
 	obj.Push(2)
 	obj.Push(5)
@@ -64,24 +60,27 @@ func main () {
  * param_4 := obj.GetMin();
  */
 
- type (
+type (
 	Stack struct {
-		top *node
+		top    *node
 		length int
 	}
 	node struct {
 		value interface{}
-		prev *node
+		prev  *node
 	}
 )
+
 // Create a new stack
 func New() *Stack {
-	return &Stack{nil,0}
+	return &Stack{nil, 0}
 }
+
 // Return the number of items in the stack
 func (this *Stack) Len() int {
 	return this.length
 }
+
 // View the top item on the stack
 func (this *Stack) Peek() interface{} {
 	if this.length == 0 {
@@ -89,6 +88,7 @@ func (this *Stack) Peek() interface{} {
 	}
 	return this.top.value
 }
+
 // Pop the top item of the stack and return it
 func (this *Stack) Pop() interface{} {
 	if this.length == 0 {
@@ -100,9 +100,10 @@ func (this *Stack) Pop() interface{} {
 	this.length--
 	return n.value
 }
+
 // Push a value onto the top of the stack
 func (this *Stack) Push(value interface{}) {
-	n := &node{value,this.top}
+	n := &node{value, this.top}
 	this.top = n
 	this.length++
 }
